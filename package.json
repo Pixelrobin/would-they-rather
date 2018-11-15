@@ -1,0 +1,14 @@
+{
+  "name": "would-they-rather",
+  "version": "1.0.0",
+  "description": "New Year's Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Savchuk",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
