@@ -1,41 +1,31 @@
 class Game {
-	constructor() {
-		this.numbers = {};
+	constructor(numbers) {
 		this.votes = {};
+		this.numbers = numbers;
 	}
 
 	submit(number, message) {
-		if (number in this.numbers) {
+		if (number in numbers) {
 			const vote = message.toLowerCase().replace(/([^a-z])/g, '');
+			const table = this.numbers[number].toString();
 
 			if (vote === 'a' || vote === 'b') {
-				this.votes[number] = vote;
+				this.votes[table] = vote;
 
-				return `Your vote is now ${ vote.toUpperCase() }`;
+				return `Voted for ${ vote.toUpperCase() }!`;
 			} else return 'Please vote with "A" or "B"';
-		} else {
-			const table = parseInt(message);
-
-			if (isFinite(table)) {
-				if (table > 0 && table <= 10) {
-					this.numbers[number] = table;
-				}
-
-				return `You are now signed up for table ${ table }`
-			} else return 'Please enter a valid table number to sign up';
-		}
+		} else return 'Your number is not signed up for a table';
 	}
 
 	getVotes() {
-		return this.votes;
-		/*return Object.keys(this.votes)
-			.reduce((result, number) => {
-				const vote = this.votes[number];
+		return Object.keys(this.votes)
+			.reduce((result, table) => {
+				const vote = this.votes[table];
 
 				if (vote in result) {
 					result[vote ++];
 				}
-			}, { a: 0, b: 0 });*/
+			}, { a: 0, b: 0 });
 	}
 }
 
