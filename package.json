@@ -4,11 +4,14 @@
   "description": "New Year's Game",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Michael Savchuk",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
   }
 }
