@@ -4,7 +4,7 @@
   "description": "New Year's Game",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "author": "Michael Savchuk",
   "license": "MIT",

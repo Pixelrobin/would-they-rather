@@ -1,7 +1,9 @@
 require('dotenv').config();
-const express = require('express');
-const app = express();
 
+const express = require('express');
+const Game    = require('./game');
+
+const app    = express();
 const tables = process.env.tables.toString();
 
 app.use(express.static('client/build'));
@@ -27,6 +29,12 @@ app.post('/submit', (req, res) => {
 			} res.send(`Table ${ table } does not exist.`)
 		} else res.send('Please enter a valid table number to sign up');
 	}
+});
+
+app.get('/start', (req, res) => {
+	game = new Game(numbers);
+
+	res.send('New game started!');
 });
 
 module.exports = app;

@@ -5,7 +5,7 @@ class Game {
 	}
 
 	submit(number, message) {
-		if (number in numbers) {
+		if (number in this.numbers) {
 			const vote = message.toLowerCase().replace(/([^a-z])/g, '');
 			const table = this.numbers[number].toString();
 
@@ -23,8 +23,10 @@ class Game {
 				const vote = this.votes[table];
 
 				if (vote in result) {
-					result[vote ++];
+					result[vote] ++;
 				}
+
+				return result;
 			}, { a: 0, b: 0 });
 	}
 }
