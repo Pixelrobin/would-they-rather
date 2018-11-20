@@ -17,7 +17,9 @@ app.post('/submit', (req, res) => {
 	const { number, message } = req.body;
 
 	if (game) {
+		const response = game.submit(number, message);
 
+		res.send(response);
 	} else {
 		const table = parseInt(message);
 
@@ -26,7 +28,7 @@ app.post('/submit', (req, res) => {
 				numbers[number] = table;
 
 				res.send(`You are now signed up for table ${ table }`);
-			} res.send(`Table ${ table } does not exist.`)
+			} else res.send(`Table ${ table } does not exist.`)
 		} else res.send('Please enter a valid table number to sign up');
 	}
 });
@@ -35,6 +37,12 @@ app.get('/start', (req, res) => {
 	game = new Game(numbers);
 
 	res.send('New game started!');
+});
+
+app.get('/summary', (req, res) => {
+	if (game) {
+		res.json(game.getSummary());
+	} else res.send('no game started');
 });
 
 module.exports = app;

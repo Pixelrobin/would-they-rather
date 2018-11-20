@@ -17,7 +17,7 @@ class Game {
 		} else return 'Your number is not signed up for a table';
 	}
 
-	getVotes() {
+	getSummary() {
 		return Object.keys(this.votes)
 			.reduce((result, table) => {
 				const vote = this.votes[table];

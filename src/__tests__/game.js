@@ -106,13 +106,13 @@ describe('game', () => {
 		});
 	});
 
-	describe('getVotes', () => {
+	describe('getSummary', () => {
 		it('should get votes', () => {
 			game.submit('123', 'a');
 			game.submit('456', 'b');
 			game.submit('789', 'a');
 
-			const votes = game.getVotes();
+			const votes = game.getSummary();
 
 			expect(votes).toEqual({ a: 2, b: 1 });
 		});
