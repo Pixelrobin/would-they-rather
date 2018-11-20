@@ -4,7 +4,8 @@
   "description": "New Year's Game",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "dev": "parcel client/src/views/*.html"
   },
   "author": "Michael Savchuk",
   "license": "MIT",
@@ -13,7 +14,12 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "jest": "^23.6.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "supertest": "^3.3.0"
   }
 }
