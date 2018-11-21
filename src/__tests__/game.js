@@ -123,7 +123,7 @@ describe('game', () => {
 			game.submit('456', 'b');
 			game.submit('789', 'a');
 
-			const votes = game.getSummary();
+			const votes = game.getStateSummary();
 			const expected = [
 				{
 					option: 'Option 1',

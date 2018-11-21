@@ -1,19 +1,27 @@
-require('dotenv').config();
-
 const http    = require('http');
 const express = require('express');
 
-const Game = require('./game');
+const setup = require('../setup.json');
+const Game  = require('./game');
 
-const app    = express();
-const tables = process.env.tables.toString();
+
+/* --- App Setup --- */
+
+const app = express();
 
 app.use(express.static('client/build'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const numbers = {};
+
+/* --- Game Setup --- */
+
+let numbers = {};
 let game;
+let scores = [];
+
+
+/* --- Routes --- */
 
 app.post('/submit', (req, res) => {
 	const { number, message } = req.body;
@@ -26,7 +34,7 @@ app.post('/submit', (req, res) => {
 		const table = parseInt(message);
 
 		if (isFinite(table)) {
-			if (table > 0 && table <= tables) {
+			if (table > 0 && table <= setup.numTables) {
 				numbers[number] = table;
 
 				res.send(`You are now signed up for table ${ table }`);
@@ -52,6 +60,18 @@ app.get('/start/:questionID', (req, res) => {
 		});
 
 	} else res.send('Invalid game ID');
+});
+
+app.get('end/:choice', (req, res) => {
+	const choice = parseInt(req.params.choice);
+
+	if (isFinite(choice)) {
+		game.end(choice);
+
+		res.send('Game Ended');
+	}
+
+	res.send('Invalid choice');
 });
 
 app.get('/summary', (req, res) => {

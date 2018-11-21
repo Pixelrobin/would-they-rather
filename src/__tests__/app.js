@@ -1,20 +1,20 @@
 const app = require('../app');
 const request = require('supertest');
 
-const defaultEnv = { ...process.env };
+const setup = {
+	port: 80,
+	numTables: 10,
+	roundLength: 20
+}
+
+jest.mock('../../setup.json', () => setup);
+jest.useFakeTimers();
 
 describe('app', () => {
 	let server;
 
-	beforeEach(() => {
-		process.env.tables = 10;
-		server = app.listen(3000);
-	});
-
-	afterEach(() => {
-		process.env = defaultEnv;
-		server.close();
-	});
+	beforeEach(() => { server = app.listen(3000) });
+	afterEach(() => { server.close() });
 
 	describe('submit', () => {
 		const defaultPlayerSettings = { number: '123', message: '5' };

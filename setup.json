@@ -1,0 +1,5 @@
+{
+	"port": 80,
+	"numTables": 10,
+	"roundLength": 20
+}

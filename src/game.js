@@ -1,13 +1,14 @@
 const EventEmitter = require('events');
 
 const questions = require('../data/questions.json');
+const setup     = require('../setup.json');
 
 class Game extends EventEmitter {
 	constructor(questionID, numbers) {
 		super();
 
 		const options = questions[questionID];
-		const roundLength = parseInt(process.env.length);
+		const roundLength = setup.roundLength;
 
 		if (options) {
 			this.options = options;
