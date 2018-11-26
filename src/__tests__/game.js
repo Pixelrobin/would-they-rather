@@ -117,24 +117,29 @@ describe('game', () => {
 		});
 	});
 
-	describe('getSummary', () => {
+	describe('getState', () => {
 		it('should get votes', () => {
 			game.submit('123', 'a');
 			game.submit('456', 'b');
 			game.submit('789', 'a');
 
-			const votes = game.getStateSummary();
-			const expected = [
-				{
-					option: 'Option 1',
-					votes: 2
-				}, {
-					option: 'Option 2',
-					votes: 1
-				}
-			];
+			const summary = game.getState();
+			const expected = {
+				type: 'game',
+				finished: false,
+				votes: [
+					{
+						option: 'Option 1',
+						votes: 2
+					}, {
+						option: 'Option 2',
+						votes: 1
+					}
+				],
+				choice: -1
+			}
 
-			expect(votes).toEqual(expected);
+			expect(summary).toEqual(expected);
 		});
 	});
 });

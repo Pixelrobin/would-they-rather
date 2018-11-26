@@ -20,7 +20,7 @@ class Game extends EventEmitter {
 		this.finished = false;
 		this.choice = -1;
 
-		setInterval(() => { this.tick() }, 1000);
+		this.tickInterval = setInterval(() => { this.tick() }, 1000);
 	}
 
 	submit(number, message) {
@@ -33,26 +33,34 @@ class Game extends EventEmitter {
 			if (voteIndex !== -1) {
 				this.votes[table] = voteIndex;
 
+				this.emitUpdate();
+
 				return `Voted for ${ vote.toUpperCase() }!`;
 			} else return 'Please vote with "A" or "B"';
 		} else return 'Your number is not signed up for a table';
 	}
 
 	tick() {
-		if (this.time > 0) this.time --;
-		else if (!this.finished) {
+		if (this.time > 0) {
+			this.time --;
+			this.emit('tick', this.time);
+		} else if (!this.finished) {
 			this.emit('timeout');
 			this.finished = true;
+
+			clearInterval(this.tickInterval);
 		}
 	}
 
-	getStateSummary() {
+	emitUpdate() {
+		this.emit('update', this.getState());
+	}
+
+	getState() {
 		const votes = this.votes
 			
-			.reduce((result, table, index, array) => {
-				const vote = this.votes[table];
-
-				if (array[vote] !== undefined) {
+			.reduce((result, vote) => {
+				if (result[vote] !== undefined) {
 					result[vote] ++;
 				}
 
@@ -67,7 +75,7 @@ class Game extends EventEmitter {
 			});
 		
 		return {
-			time: this.time,
+			type: 'game',
 			finished: this.finished,
 			votes,
 			choice: this.choice
@@ -80,6 +88,7 @@ class Game extends EventEmitter {
 			if (!this.finished) this.finished = true;
 
 			this.choice = choice;
+			this.emitUpdate();
 
 			return this.votes.map(vote => vote === choice ? 1 : 0);
 		}

@@ -1,4 +1,4 @@
-const app = require('./src/app');
+const Server = require('./src/Server');
 const port = 80;
 
 console.log('');
@@ -7,4 +7,6 @@ console.log('| WOULD YOU RATHER SERVER STARTING |');
 console.log('+----------------------------------+');
 console.log('');
 
-const server = app.listen(port, () => console.log(`RUNNING ON PORT ${ port }`));
+Server.listen(port, () => console.log(`RUNNING ON PORT ${ port }`));
+
+require('./test-utils/players');

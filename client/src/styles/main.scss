@@ -1,0 +1,166 @@
+// --- Colors
+
+$color-black: #161616;
+$color-gold: #FFE7A6;
+$color-grey: #888;
+
+
+// --- Fonts
+
+$font-condensed: 'Roboto Condensed', sans-serif;
+$font-slab: 'Roboto Slab', serif;
+
+$font-weight-thin: 100;
+$font-weight-light: 300;
+
+
+// --- Mixins
+
+@mixin text-big {
+	font-family: $font-condensed;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-weight: $font-weight-light;
+	line-height: 1.5;
+	font-size: 4rem;
+}
+
+@mixin text-small {
+	@include text-big;
+
+	font-size: 2rem;
+}
+
+@mixin text-list {
+	@include text-big;
+
+	font-size: 3rem;
+}
+
+@mixin text-number {
+	
+}
+
+// --- Base
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-weight: $font-weight-light;
+}
+
+
+// --- Choices block
+
+.game {
+	display: grid;
+	grid-template-columns: 1fr 1fr 8rem;
+	gap: 4rem;
+	height: 100vh;
+	width: 100%;
+	padding: 4rem;
+
+	&__tile {
+		background-color: $color-black;
+		height: 100%;
+		color: white;
+		transition: all 0.25s;
+
+		&--choosen {
+			transform: scale(1.025);
+		}
+
+		&--rejected {
+			transform: scale(0.9);
+			background-color: white;
+			color: $color-grey;
+
+			.game__tile__vote__number {
+				color: $color-grey;
+			}
+		}
+
+		&__text {
+			@include text-big;
+
+			padding: 4rem;
+			padding-top: 8rem;
+			text-align: center;
+			height: 50%;
+		}
+
+		&__vote {
+			flex: 1;
+			height: 50%;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			line-height: 1.1;
+			justify-content: center;
+			transform: color 0.25s;
+
+			&__number {
+				font-family: $font-slab;
+				display: block;
+				color: $color-gold;
+				font-size: 220px;
+				font-weight: $font-weight-thin;
+			}
+
+			&__text {
+				@include text-small;
+
+				display: block;
+			}
+		}
+	}
+
+	&__countdown {
+		font-family: $font-condensed;
+		font-size: 96px;
+		display: flex;
+		text-align: center;
+		align-items: center;
+	}
+}
+
+.scores {
+	@include text-list;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+
+	color: $color-black;
+
+	&__table {
+		width: 100%;
+		max-width: 60rem;
+		white-space: nowrap;
+		border: none;
+		border-spacing: 0;
+
+		td {
+			padding: 0 2rem;
+		}
+
+		&__top {
+			background-color: $color-gold;
+		}
+
+		&__name {
+			width: 100%;
+		}
+	}
+}
