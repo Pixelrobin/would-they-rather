@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import io from 'socket.io-client';
 
 import Game from './components/Game';
-import Scores from './components/Scores';
+import TableList from './components/TableList';
 
 class App extends React.Component {
 	constructor(props) {
@@ -38,7 +38,7 @@ class App extends React.Component {
 
 		if (data) {
 			if (data.type === 'game') return <Game data={ data } time={ time }/>
-			else if (data.type === 'scores') return <Scores data={ data }/>
+			else if (data.type === 'tables') return <TableList data={ data }/>
 		}
 
 		return <React.Fragment></React.Fragment>

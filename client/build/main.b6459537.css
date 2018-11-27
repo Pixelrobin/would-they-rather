@@ -93,7 +93,7 @@ body {
     border: none;
     border-spacing: 0; }
     .scores__table td {
-      padding: 0 2rem; }
+      padding: 0 1.5rem; }
     .scores__table__top {
       background-color: #FFE7A6; }
     .scores__table__name {

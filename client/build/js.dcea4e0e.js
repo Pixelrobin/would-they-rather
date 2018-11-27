@@ -33313,7 +33313,7 @@ var Game = function Game(_ref) {
 
 var _default = Game;
 exports.default = _default;
-},{"react":"../../../node_modules/react/index.js","./GameTile":"../js/components/GameTile.jsx"}],"../js/components/Scores.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","./GameTile":"../js/components/GameTile.jsx"}],"../js/components/TableList.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33327,15 +33327,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Scores = function Scores(_ref) {
   var data = _ref.data;
-  var scores = data.scores;
-  var top = scores[0];
+  var tables = data.tables;
 
   var getTableList = function getTableList() {
-    return scores.map(function (item, index) {
-      var name = item.name,
-          score = item.score;
+    return tables.map(function (table, index) {
+      var name = table.name,
+          score = table.score,
+          top = table.top;
       return _react.default.createElement("tr", {
-        className: index === 0 ? 'scores__table__top' : '',
+        className: top ? 'scores__table__top' : '',
         key: index
       }, _react.default.createElement("td", null, "# ", index + 1), _react.default.createElement("td", {
         className: "scores__table__name"
@@ -33363,7 +33363,7 @@ var _socket = _interopRequireDefault(require("socket.io-client"));
 
 var _Game = _interopRequireDefault(require("./components/Game"));
 
-var _Scores = _interopRequireDefault(require("./components/Scores"));
+var _TableList = _interopRequireDefault(require("./components/TableList"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33439,7 +33439,7 @@ function (_React$Component) {
         if (data.type === 'game') return _react.default.createElement(_Game.default, {
           data: data,
           time: time
-        });else if (data.type === 'scores') return _react.default.createElement(_Scores.default, {
+        });else if (data.type === 'tables') return _react.default.createElement(_TableList.default, {
           data: data
         });
       }
@@ -33454,7 +33454,7 @@ function (_React$Component) {
 var app = document.getElementById("app");
 
 _reactDom.default.render(_react.default.createElement(App, null), app);
-},{"react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","socket.io-client":"../../../node_modules/socket.io-client/lib/index.js","./components/Game":"../js/components/Game.jsx","./components/Scores":"../js/components/Scores.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","socket.io-client":"../../../node_modules/socket.io-client/lib/index.js","./components/Game":"../js/components/Game.jsx","./components/TableList":"../js/components/TableList.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33481,7 +33481,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50546" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65492" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -4,7 +4,7 @@ const socketio = require('socket.io');
 
 const setup  = require('../setup.json');
 const Game   = require('./game');
-const scores = require('./scores');
+const tables = require('./tables');
 
 
 /* --- App Setup --- */
@@ -43,7 +43,7 @@ function emitGameState() {
 }
 
 function emitScoresState() {
-	io.of('/').emit('data', scores.getState());
+	io.of('/').emit('data', tables.getState());
 }
 
 function updateClients() {
@@ -81,6 +81,7 @@ app.post('/submit', (req, res) => {
 			if (table > 0 && table <= setup.numTables) {
 				numbers[number] = table;
 
+				tables.registerTable(table);
 				updateClients();
 
 				res.send(`You are now signed up for table ${ table }`);
@@ -118,7 +119,7 @@ app.get('/end/:choice', (req, res) => {
 		
 		const newScores = game.end(choice);
 
-		scores.applyGameScores(newScores);
+		tables.applyGameScores(newScores);
 
 		endTimeout = setTimeout(() => {
 			emitScoresState();
