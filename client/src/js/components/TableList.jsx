@@ -11,7 +11,7 @@ const Scores = ({ data }) => {
 				<tr className={ top ? 'scores__table__top' : '' } key={index}>
 					<td># { index + 1 }</td>
 					<td className="scores__table__name">{ name }</td>
-					<td>{ score } Points</td>
+					<td>{ score } { score === 1 ? 'Point' : 'Points' }</td>
 				</tr>
 			);
 		});
