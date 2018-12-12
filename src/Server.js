@@ -1,6 +1,7 @@
 const http     = require('http');
 const express  = require('express');
 const socketio = require('socket.io');
+const twilio   = require('twilio');
 
 const setup  = require('../setup.json');
 const Game   = require('./game');
@@ -9,6 +10,7 @@ const tables = require('./tables');
 
 /* --- App Setup --- */
 
+const MessagingResponse = twilio.twiml.MessagingResponse;
 const app = express();
 
 app.use(express.static('client/build'));
@@ -63,17 +65,13 @@ io.on('connection', socket => {
 });
 
 
-/* --- Routes --- */
+/* --- Server Functions --- */
 
-// -- Submit
-
-app.post('/submit', (req, res) => {
-	const { number, message } = req.body;
-
+function submitMessage(number, message) {
 	if (game) {
 		const response = game.submit(number, message);
 
-		res.send(response);
+		return response;
 	} else {
 		const table = parseInt(message);
 
@@ -84,10 +82,31 @@ app.post('/submit', (req, res) => {
 				tables.registerTable(table);
 				updateClients();
 
-				res.send(`You are now signed up for table ${ table }`);
-			} else res.send(`Table ${ table } does not exist.`);
-		} else res.send('Please enter a valid table number to sign up');
+				return `You are now signed up for table ${ table }`;
+			} else return `Table ${ table } does not exist.`;
+		} else return 'Please enter a valid table number to sign up';
 	}
+}
+
+
+/* --- Routes --- */
+
+// -- Submit
+
+app.post('/submit', (req, res) => {
+	const { number, message } = req.body;
+
+	res.send(submitMessage(number, message));
+});
+
+app.post('/sms', (req, res) => {
+	const { From, Body } = req.body;
+
+	const twiml = new MessagingResponse();
+	twiml.message(submitMessage(From, Body));
+
+	res.writeHead(200, { 'Content-Type': 'text/xml' });
+	res.end(twiml.toString());
 });
 
 // -- Start a round
