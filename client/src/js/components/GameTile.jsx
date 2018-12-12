@@ -1,8 +1,13 @@
 import React from 'react';
 
-const GameTile = ({ voteData, choosen, rejected }) => {
+const GameTile = ({ letter, icon, voteData, choosen, rejected }) => {
 	return (
 		<div className={`game__tile ${ choosen ? 'game__tile--choosen' : '' } ${ rejected ? 'game__tile--rejected' : '' }`}>
+			<div class="game__tile__icon">
+				<img src={ icon } alt=""/>
+				<span>{ letter }</span>
+			</div>
+			
 			<div className="game__tile__text">{ voteData.option }</div>
 			<div className="game__tile__vote">
 				<span className="game__tile__vote__number">{ voteData.votes }</span>

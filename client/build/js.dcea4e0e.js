@@ -33248,12 +33248,19 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GameTile = function GameTile(_ref) {
-  var voteData = _ref.voteData,
+  var letter = _ref.letter,
+      icon = _ref.icon,
+      voteData = _ref.voteData,
       choosen = _ref.choosen,
       rejected = _ref.rejected;
   return _react.default.createElement("div", {
     className: "game__tile ".concat(choosen ? 'game__tile--choosen' : '', " ").concat(rejected ? 'game__tile--rejected' : '')
   }, _react.default.createElement("div", {
+    "class": "game__tile__icon"
+  }, _react.default.createElement("img", {
+    src: icon,
+    alt: ""
+  }), _react.default.createElement("span", null, letter)), _react.default.createElement("div", {
     className: "game__tile__text"
   }, voteData.option), _react.default.createElement("div", {
     className: "game__tile__vote"
@@ -33266,7 +33273,16 @@ var GameTile = function GameTile(_ref) {
 
 var _default = GameTile;
 exports.default = _default;
-},{"react":"../../../node_modules/react/index.js"}],"../js/components/Game.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js"}],"../media/BubbleLeft.svg":[function(require,module,exports) {
+module.exports = "/BubbleLeft.7454cc92.svg";
+},{}],"../media/BubbleRight.svg":[function(require,module,exports) {
+module.exports = "/BubbleRight.ab175264.svg";
+},{}],"../media/*.svg":[function(require,module,exports) {
+module.exports = {
+  "BubbleLeft": require("./BubbleLeft.svg"),
+  "BubbleRight": require("./BubbleRight.svg")
+};
+},{"./BubbleLeft.svg":"../media/BubbleLeft.svg","./BubbleRight.svg":"../media/BubbleRight.svg"}],"../js/components/Game.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33277,6 +33293,8 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _GameTile = _interopRequireDefault(require("./GameTile"));
+
+var _ = require("../../media/*.svg");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33299,10 +33317,14 @@ var Game = function Game(_ref) {
   return _react.default.createElement("div", {
     className: "game"
   }, _react.default.createElement(_GameTile.default, {
+    letter: "A",
+    icon: _.BubbleLeft,
     voteData: votes[0],
     choosen: checkChoosen(0),
     rejected: checkRejected(0)
   }), _react.default.createElement(_GameTile.default, {
+    letter: "B",
+    icon: _.BubbleRight,
     voteData: votes[1],
     choosen: checkChoosen(1),
     rejected: checkRejected(1)
@@ -33313,7 +33335,7 @@ var Game = function Game(_ref) {
 
 var _default = Game;
 exports.default = _default;
-},{"react":"../../../node_modules/react/index.js","./GameTile":"../js/components/GameTile.jsx"}],"../js/components/TableList.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","./GameTile":"../js/components/GameTile.jsx","../../media/*.svg":"../media/*.svg"}],"../js/components/TableList.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33339,7 +33361,7 @@ var Scores = function Scores(_ref) {
         key: index
       }, _react.default.createElement("td", null, "# ", index + 1), _react.default.createElement("td", {
         className: "scores__table__name"
-      }, name), _react.default.createElement("td", null, score, " Points"));
+      }, name), _react.default.createElement("td", null, score, " ", score === 1 ? 'Point' : 'Points'));
     });
   };
 
@@ -33481,7 +33503,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65492" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61791" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
