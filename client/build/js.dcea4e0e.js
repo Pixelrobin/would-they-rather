@@ -33262,7 +33262,7 @@ var GameTile = function GameTile(_ref) {
     alt: ""
   }), _react.default.createElement("span", null, letter)), _react.default.createElement("div", {
     className: "game__tile__text"
-  }, voteData.option), _react.default.createElement("div", {
+  }, _react.default.createElement("span", null, voteData.option)), _react.default.createElement("div", {
     className: "game__tile__vote"
   }, _react.default.createElement("span", {
     className: "game__tile__vote__number"
@@ -33429,7 +33429,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.socket = (0, _socket.default)('http://localhost:80');
+      this.socket = (0, _socket.default)();
 
       var stateUpdater = function stateUpdater(name) {
         return function (data) {

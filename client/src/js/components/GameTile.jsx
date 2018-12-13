@@ -8,7 +8,7 @@ const GameTile = ({ letter, icon, voteData, choosen, rejected }) => {
 				<span>{ letter }</span>
 			</div>
 			
-			<div className="game__tile__text">{ voteData.option }</div>
+			<div className="game__tile__text"><span>{ voteData.option }</span></div>
 			<div className="game__tile__vote">
 				<span className="game__tile__vote__number">{ voteData.votes }</span>
 				<span className="game__tile__vote__text">VOTES</span>

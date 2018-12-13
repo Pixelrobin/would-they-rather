@@ -13,7 +13,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		this.socket = io('http://localhost:80');
+		this.socket = io();
 
 		const stateUpdater = name => data => {
 			let newState = Object.assign({}, this.state);
