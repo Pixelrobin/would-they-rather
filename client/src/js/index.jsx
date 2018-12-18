@@ -37,8 +37,10 @@ class App extends React.Component {
 		const { data, time } = this.state;
 
 		if (data) {
-			if (data.type === 'game') return <Game data={ data } time={ time }/>
-			else if (data.type === 'tables') return <TableList data={ data }/>
+			switch (data.type) {
+				case 'game': return <Game data={ data } time={ time }/>
+				case 'tables': return <TableList data={ data }/>
+			}
 		}
 
 		return <React.Fragment></React.Fragment>

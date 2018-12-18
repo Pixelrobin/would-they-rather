@@ -33235,7 +33235,7 @@ exports.connect = lookup;
 exports.Manager = require('./manager');
 exports.Socket = require('./socket');
 
-},{"./url":"../../../node_modules/socket.io-client/lib/url.js","socket.io-parser":"../../../node_modules/socket.io-parser/index.js","./manager":"../../../node_modules/socket.io-client/lib/manager.js","debug":"../../../node_modules/socket.io-client/node_modules/debug/src/browser.js","./socket":"../../../node_modules/socket.io-client/lib/socket.js"}],"../js/components/GameTile.jsx":[function(require,module,exports) {
+},{"./url":"../../../node_modules/socket.io-client/lib/url.js","socket.io-parser":"../../../node_modules/socket.io-parser/index.js","./manager":"../../../node_modules/socket.io-client/lib/manager.js","debug":"../../../node_modules/socket.io-client/node_modules/debug/src/browser.js","./socket":"../../../node_modules/socket.io-client/lib/socket.js"}],"../js/components/Confetti.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33247,33 +33247,313 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var GameTile = function GameTile(_ref) {
-  var letter = _ref.letter,
-      icon = _ref.icon,
-      voteData = _ref.voteData,
-      choosen = _ref.choosen,
-      rejected = _ref.rejected;
-  return _react.default.createElement("div", {
-    className: "game__tile ".concat(choosen ? 'game__tile--choosen' : '', " ").concat(rejected ? 'game__tile--rejected' : '')
-  }, _react.default.createElement("div", {
-    "class": "game__tile__icon"
-  }, _react.default.createElement("img", {
-    src: icon,
-    alt: ""
-  }), _react.default.createElement("span", null, letter)), _react.default.createElement("div", {
-    className: "game__tile__text"
-  }, _react.default.createElement("span", null, voteData.option)), _react.default.createElement("div", {
-    className: "game__tile__vote"
-  }, _react.default.createElement("span", {
-    className: "game__tile__vote__number"
-  }, voteData.votes), _react.default.createElement("span", {
-    className: "game__tile__vote__text"
-  }, "VOTES")));
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var shapes = [, 1, 2, 3, 4, 5].map(function (sides) {
+  var angle = Math.PI * 2 / sides;
+  var shape = [];
+
+  for (var s = 1; s <= sides; s++) {
+    shape.push({
+      x: Math.cos(s * angle),
+      y: Math.sin(s * angle)
+    });
+  }
+
+  return shape;
+});
+
+var Confetti =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Confetti, _React$Component);
+
+  function Confetti(props) {
+    var _this;
+
+    _classCallCheck(this, Confetti);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Confetti).call(this, props));
+    _this.canvas = _react.default.createRef();
+    _this.particles = [];
+    _this.lastFrame = 0;
+    return _this;
+  }
+
+  _createClass(Confetti, [{
+    key: "onAnimationFrame",
+    value: function onAnimationFrame(frame) {
+      var canvas = this.canvas.current;
+      var ctx = canvas.getContext('2d');
+      var width = canvas.width,
+          height = canvas.height;
+      var delta = frame - this.lastFrame;
+      var size = 16;
+      this.lastFrame = frame;
+      ctx.fillStyle = '#FFE7A6';
+      ctx.clearRect(0, 0, width, height);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.particles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var p = _step.value;
+
+          if (p.time > 0) {
+            ctx.translate(p.x, p.y);
+            ctx.scale(p.scale, p.scale);
+            ctx.rotate(p.angle);
+            var shape = shapes[p.sides];
+            ctx.beginPath();
+            ctx.moveTo(size, 0);
+            shape.forEach(function (point) {
+              ctx.lineTo(point.x * size, point.y * size);
+            });
+            ctx.fill();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            p.time -= delta;
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.gravity += 0.002 * p.gravityScale;
+            p.speedX += 0 - p.speedX * p.friction;
+            p.speedY += p.gravity - p.speedY * p.friction;
+            p.angle += p.angleSpeed;
+            p.angleSpeed += -p.angleSpeed * 0.05;
+            var foo = 1 - p.time / p.life;
+            var bar = -(foo * foo * foo * foo) + 1;
+            p.scale = bar;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      requestAnimationFrame(this.onAnimationFrame.bind(this));
+    }
+  }, {
+    key: "burst",
+    value: function burst() {
+      var _this$props = this.props,
+          elementRef = _this$props.elementRef,
+          padding = _this$props.padding;
+      var bounds = elementRef.current.getBoundingClientRect();
+
+      var randomOnEdge = function randomOnEdge() {
+        var subWidth = bounds.width;
+        var subHeight = bounds.height - padding * 2;
+        var subRatio = subWidth / subHeight * 0.5;
+        var wh = Math.random();
+        var x;
+        var y;
+
+        if (wh > subRatio) {
+          x = Math.random() * padding;
+          y = Math.random() * subHeight + padding;
+          if (Math.random() >= 0.5) x = bounds.width - x;
+        } else {
+          x = Math.random() * subWidth;
+          y = Math.random() * padding;
+          if (Math.random() >= 0.5) y = bounds.height - y;
+        }
+
+        x += bounds.left;
+        y += bounds.top;
+        return {
+          x: x,
+          y: y
+        };
+      };
+
+      var normalized = function normalized(x, y) {
+        var d = Math.sqrt(x * x + y * y);
+
+        if (d > 0) {
+          x /= d;
+          y /= d;
+        }
+
+        return {
+          x: x,
+          y: y
+        };
+      };
+
+      for (var p = 0; p < 75; p++) {
+        var life = Math.random() * 2000;
+
+        var _randomOnEdge = randomOnEdge(bounds.width, bounds.height, 200),
+            x = _randomOnEdge.x,
+            y = _randomOnEdge.y;
+
+        var center_x = bounds.left + bounds.width / 2;
+        var center_y = bounds.top + bounds.height / 2;
+        var spd = normalized(x - center_x, y - center_y);
+        this.particles[p] = {
+          time: life,
+          life: life,
+          x: x,
+          y: y,
+          speedX: spd.x * 25,
+          speedY: spd.y * 25,
+          scale: 1,
+          gravityScale: Math.random(),
+          gravity: 0,
+          angle: Math.random() * Math.PI * 2,
+          angleSpeed: Math.random() * 0.5,
+          friction: Math.random() * 0.1 + 0.05,
+          sides: Math.floor(Math.random() * 2) + 3
+        };
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var canvas = this.canvas.current;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      this.lastFrame = performance.now();
+      requestAnimationFrame(this.onAnimationFrame.bind(this));
+      this.burst();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("canvas", {
+        className: "confetti-canvas",
+        ref: this.canvas,
+        width: "100",
+        height: "100"
+      });
+    }
+  }]);
+
+  return Confetti;
+}(_react.default.Component);
+
+exports.default = Confetti;
+},{"react":"../../../node_modules/react/index.js"}],"../js/components/GameTile.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Confetti = _interopRequireDefault(require("./Confetti"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ConditionalConfetti = function ConditionalConfetti(props) {
+  if (props.show) {
+    return _react.default.createElement(_Confetti.default, props);
+  } else return _react.default.createElement(_react.default.Fragment, null);
 };
+
+var GameTile =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GameTile, _React$Component);
+
+  function GameTile(props) {
+    var _this;
+
+    _classCallCheck(this, GameTile);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameTile).call(this, props));
+    _this.tile = _react.default.createRef();
+    return _this;
+  }
+
+  _createClass(GameTile, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          letter = _this$props.letter,
+          icon = _this$props.icon,
+          voteData = _this$props.voteData,
+          choosen = _this$props.choosen,
+          rejected = _this$props.rejected;
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        ref: this.tile,
+        className: "game__tile ".concat(choosen ? 'game__tile--choosen' : '', " ").concat(rejected ? 'game__tile--rejected' : '')
+      }, _react.default.createElement("div", {
+        "class": "game__tile__icon"
+      }, _react.default.createElement("img", {
+        src: icon,
+        alt: ""
+      }), _react.default.createElement("span", null, letter)), _react.default.createElement("div", {
+        className: "game__tile__text"
+      }, _react.default.createElement("span", null, voteData.option)), _react.default.createElement("div", {
+        className: "game__tile__vote"
+      }, _react.default.createElement("span", {
+        className: "game__tile__vote__number"
+      }, voteData.votes), _react.default.createElement("span", {
+        className: "game__tile__vote__text"
+      }, "VOTES"))), _react.default.createElement(ConditionalConfetti, {
+        show: choosen,
+        padding: 200,
+        elementRef: this.tile
+      }));
+    }
+  }]);
+
+  return GameTile;
+}(_react.default.Component);
 
 var _default = GameTile;
 exports.default = _default;
-},{"react":"../../../node_modules/react/index.js"}],"../media/BubbleLeft.svg":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","./Confetti":"../js/components/Confetti.jsx"}],"../media/BubbleLeft.svg":[function(require,module,exports) {
 module.exports = "/BubbleLeft.7454cc92.svg";
 },{}],"../media/BubbleRight.svg":[function(require,module,exports) {
 module.exports = "/BubbleRight.ab175264.svg";
@@ -33458,12 +33738,18 @@ function (_React$Component) {
           time = _this$state.time;
 
       if (data) {
-        if (data.type === 'game') return _react.default.createElement(_Game.default, {
-          data: data,
-          time: time
-        });else if (data.type === 'tables') return _react.default.createElement(_TableList.default, {
-          data: data
-        });
+        switch (data.type) {
+          case 'game':
+            return _react.default.createElement(_Game.default, {
+              data: data,
+              time: time
+            });
+
+          case 'tables':
+            return _react.default.createElement(_TableList.default, {
+              data: data
+            });
+        }
       }
 
       return _react.default.createElement(_react.default.Fragment, null);
@@ -33503,7 +33789,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61791" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59065" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
