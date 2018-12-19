@@ -33235,7 +33235,91 @@ exports.connect = lookup;
 exports.Manager = require('./manager');
 exports.Socket = require('./socket');
 
-},{"./url":"../../../node_modules/socket.io-client/lib/url.js","socket.io-parser":"../../../node_modules/socket.io-parser/index.js","./manager":"../../../node_modules/socket.io-client/lib/manager.js","debug":"../../../node_modules/socket.io-client/node_modules/debug/src/browser.js","./socket":"../../../node_modules/socket.io-client/lib/socket.js"}],"../js/components/Confetti.jsx":[function(require,module,exports) {
+},{"./url":"../../../node_modules/socket.io-client/lib/url.js","socket.io-parser":"../../../node_modules/socket.io-parser/index.js","./manager":"../../../node_modules/socket.io-client/lib/manager.js","debug":"../../../node_modules/socket.io-client/node_modules/debug/src/browser.js","./socket":"../../../node_modules/socket.io-client/lib/socket.js"}],"../js/components/GameTile.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var GameTile =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(GameTile, _React$Component);
+
+  function GameTile(props) {
+    var _this;
+
+    _classCallCheck(this, GameTile);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameTile).call(this, props));
+    _this.tile = _react.default.createRef();
+    return _this;
+  }
+
+  _createClass(GameTile, [{
+    key: "getBounds",
+    value: function getBounds() {
+      return this.tile.current.getBoundingClientRect();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          letter = _this$props.letter,
+          icon = _this$props.icon,
+          voteData = _this$props.voteData,
+          choosen = _this$props.choosen,
+          rejected = _this$props.rejected;
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        ref: this.tile,
+        className: "game__tile ".concat(choosen ? 'game__tile--choosen' : '', " ").concat(rejected ? 'game__tile--rejected' : '')
+      }, _react.default.createElement("div", {
+        "class": "game__tile__icon"
+      }, _react.default.createElement("img", {
+        src: icon,
+        alt: ""
+      }), _react.default.createElement("span", null, letter)), _react.default.createElement("div", {
+        className: "game__tile__text"
+      }, _react.default.createElement("span", null, voteData.option)), _react.default.createElement("div", {
+        className: "game__tile__vote"
+      }, _react.default.createElement("span", {
+        className: "game__tile__vote__number"
+      }, voteData.votes), _react.default.createElement("span", {
+        className: "game__tile__vote__text"
+      }, "VOTES"))));
+    }
+  }]);
+
+  return GameTile;
+}(_react.default.Component);
+
+var _default = GameTile;
+exports.default = _default;
+},{"react":"../../../node_modules/react/index.js"}],"../js/components/Confetti.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33360,16 +33444,16 @@ function (_React$Component) {
     }
   }, {
     key: "burst",
-    value: function burst() {
-      var _this$props = this.props,
-          elementRef = _this$props.elementRef,
-          padding = _this$props.padding;
-      var bounds = elementRef.current.getBoundingClientRect();
+    value: function burst(bounds) {
+      var padding = this.props.padding; //const bounds = elementRef.current.getBoundingClientRect();
+
+      var subWidth = bounds.width;
+      var subHeight = bounds.height - padding * 2;
+      var subRatio = 1 / subWidth / (1 / subHeight); // * 0.5;
+
+      console.log(subRatio);
 
       var randomOnEdge = function randomOnEdge() {
-        var subWidth = bounds.width;
-        var subHeight = bounds.height - padding * 2;
-        var subRatio = subWidth / subHeight * 0.5;
         var wh = Math.random();
         var x;
         var y;
@@ -33406,7 +33490,7 @@ function (_React$Component) {
         };
       };
 
-      for (var p = 0; p < 75; p++) {
+      for (var p = 0; p < 100; p++) {
         var life = Math.random() * 2000;
 
         var _randomOnEdge = randomOnEdge(bounds.width, bounds.height, 200),
@@ -33441,7 +33525,6 @@ function (_React$Component) {
       canvas.height = window.innerHeight;
       this.lastFrame = performance.now();
       requestAnimationFrame(this.onAnimationFrame.bind(this));
-      this.burst();
     }
   }, {
     key: "render",
@@ -33459,7 +33542,16 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = Confetti;
-},{"react":"../../../node_modules/react/index.js"}],"../js/components/GameTile.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js"}],"../media/BubbleLeft.svg":[function(require,module,exports) {
+module.exports = "/BubbleLeft.7454cc92.svg";
+},{}],"../media/BubbleRight.svg":[function(require,module,exports) {
+module.exports = "/BubbleRight.ab175264.svg";
+},{}],"../media/*.svg":[function(require,module,exports) {
+module.exports = {
+  "BubbleLeft": require("./BubbleLeft.svg"),
+  "BubbleRight": require("./BubbleRight.svg")
+};
+},{"./BubbleLeft.svg":"../media/BubbleLeft.svg","./BubbleRight.svg":"../media/BubbleRight.svg"}],"../js/components/Game.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33469,7 +33561,11 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _GameTile = _interopRequireDefault(require("./GameTile"));
+
 var _Confetti = _interopRequireDefault(require("./Confetti"));
+
+var _ = require("../../media/*.svg");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33491,131 +33587,99 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var ConditionalConfetti = function ConditionalConfetti(props) {
-  if (props.show) {
-    return _react.default.createElement(_Confetti.default, props);
-  } else return _react.default.createElement(_react.default.Fragment, null);
-};
-
-var GameTile =
+var Game =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(GameTile, _React$Component);
+  _inherits(Game, _React$Component);
 
-  function GameTile(props) {
+  function Game(props) {
     var _this;
 
-    _classCallCheck(this, GameTile);
+    _classCallCheck(this, Game);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GameTile).call(this, props));
-    _this.tile = _react.default.createRef();
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
+    _this.confetti = _react.default.createRef();
+    _this.tileA = _react.default.createRef();
+    _this.tileB = _react.default.createRef();
     return _this;
   }
 
-  _createClass(GameTile, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
+  _createClass(Game, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var chosen = this.props.data.choice;
+
+      if (chosen !== prevProps.data.choice) {
+        var tile;
+
+        switch (chosen) {
+          case 0:
+            tile = this.tileA;
+            break;
+
+          case 1:
+            tile = this.tileB;
+            break;
+        }
+
+        console.log(tile);
+
+        if (tile) {
+          var bounds = tile.current.getBounds();
+          this.confetti.current.burst(bounds);
+        }
+      }
+    }
   }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          letter = _this$props.letter,
-          icon = _this$props.icon,
-          voteData = _this$props.voteData,
-          choosen = _this$props.choosen,
-          rejected = _this$props.rejected;
+          data = _this$props.data,
+          time = _this$props.time;
+      var votes = data.votes,
+          choice = data.choice;
+
+      var checkChoosen = function checkChoosen(id) {
+        return choice === id;
+      };
+
+      var checkRejected = function checkRejected(id) {
+        if (choice !== -1) {
+          return choice !== id;
+        } else return false;
+      };
+
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
-        ref: this.tile,
-        className: "game__tile ".concat(choosen ? 'game__tile--choosen' : '', " ").concat(rejected ? 'game__tile--rejected' : '')
-      }, _react.default.createElement("div", {
-        "class": "game__tile__icon"
-      }, _react.default.createElement("img", {
-        src: icon,
-        alt: ""
-      }), _react.default.createElement("span", null, letter)), _react.default.createElement("div", {
-        className: "game__tile__text"
-      }, _react.default.createElement("span", null, voteData.option)), _react.default.createElement("div", {
-        className: "game__tile__vote"
-      }, _react.default.createElement("span", {
-        className: "game__tile__vote__number"
-      }, voteData.votes), _react.default.createElement("span", {
-        className: "game__tile__vote__text"
-      }, "VOTES"))), _react.default.createElement(ConditionalConfetti, {
-        show: choosen,
-        padding: 200,
-        elementRef: this.tile
+        className: "game"
+      }, _react.default.createElement(_GameTile.default, {
+        ref: this.tileA,
+        letter: "A",
+        icon: _.BubbleLeft,
+        voteData: votes[0],
+        choosen: checkChoosen(0),
+        rejected: checkRejected(0)
+      }), _react.default.createElement(_GameTile.default, {
+        ref: this.tileB,
+        letter: "B",
+        icon: _.BubbleRight,
+        voteData: votes[1],
+        choosen: checkChoosen(1),
+        rejected: checkRejected(1)
+      }), _react.default.createElement("div", {
+        className: "game__countdown"
+      }, time)), _react.default.createElement(_Confetti.default, {
+        ref: this.confetti,
+        padding: 200
       }));
     }
   }]);
 
-  return GameTile;
+  return Game;
 }(_react.default.Component);
-
-var _default = GameTile;
-exports.default = _default;
-},{"react":"../../../node_modules/react/index.js","./Confetti":"../js/components/Confetti.jsx"}],"../media/BubbleLeft.svg":[function(require,module,exports) {
-module.exports = "/BubbleLeft.7454cc92.svg";
-},{}],"../media/BubbleRight.svg":[function(require,module,exports) {
-module.exports = "/BubbleRight.ab175264.svg";
-},{}],"../media/*.svg":[function(require,module,exports) {
-module.exports = {
-  "BubbleLeft": require("./BubbleLeft.svg"),
-  "BubbleRight": require("./BubbleRight.svg")
-};
-},{"./BubbleLeft.svg":"../media/BubbleLeft.svg","./BubbleRight.svg":"../media/BubbleRight.svg"}],"../js/components/Game.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _GameTile = _interopRequireDefault(require("./GameTile"));
-
-var _ = require("../../media/*.svg");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Game = function Game(_ref) {
-  var data = _ref.data,
-      time = _ref.time;
-  var votes = data.votes,
-      choice = data.choice;
-
-  var checkChoosen = function checkChoosen(id) {
-    return choice === id;
-  };
-
-  var checkRejected = function checkRejected(id) {
-    if (choice !== -1) {
-      return choice !== id;
-    } else return false;
-  };
-
-  return _react.default.createElement("div", {
-    className: "game"
-  }, _react.default.createElement(_GameTile.default, {
-    letter: "A",
-    icon: _.BubbleLeft,
-    voteData: votes[0],
-    choosen: checkChoosen(0),
-    rejected: checkRejected(0)
-  }), _react.default.createElement(_GameTile.default, {
-    letter: "B",
-    icon: _.BubbleRight,
-    voteData: votes[1],
-    choosen: checkChoosen(1),
-    rejected: checkRejected(1)
-  }), _react.default.createElement("div", {
-    className: "game__countdown"
-  }, time));
-};
 
 var _default = Game;
 exports.default = _default;
-},{"react":"../../../node_modules/react/index.js","./GameTile":"../js/components/GameTile.jsx","../../media/*.svg":"../media/*.svg"}],"../js/components/TableList.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","./GameTile":"../js/components/GameTile.jsx","./Confetti":"../js/components/Confetti.jsx","../../media/*.svg":"../media/*.svg"}],"../js/components/TableList.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33789,7 +33853,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59065" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53995" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

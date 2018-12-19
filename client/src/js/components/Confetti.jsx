@@ -67,15 +67,17 @@ export default class Confetti extends React.Component {
 		requestAnimationFrame(this.onAnimationFrame.bind(this));
 	}
 
-	burst() {
-		const { elementRef, padding } = this.props;
-		const bounds = elementRef.current.getBoundingClientRect();
+	burst(bounds) {
+		const { padding } = this.props;
+		//const bounds = elementRef.current.getBoundingClientRect();
+
+		const subWidth = bounds.width;
+		const subHeight = bounds.height - padding * 2;
+		const subRatio = (1 / subWidth) / (1 / subHeight);// * 0.5;
+
+		console.log(subRatio);
 
 		const randomOnEdge = () => {
-			const subWidth = bounds.width;
-			const subHeight = bounds.height - padding * 2;
-			const subRatio = subWidth / subHeight * 0.5;
-
 			let wh = Math.random();
 			let x;
 			let y;
@@ -109,7 +111,7 @@ export default class Confetti extends React.Component {
 			return { x, y };
 		}
 
-		for (let p = 0; p < 75; p ++) {
+		for (let p = 0; p < 100; p ++) {
 			let life = Math.random() * 2000;
 
 			const { x, y } = randomOnEdge(bounds.width, bounds.height, 200);
@@ -146,8 +148,6 @@ export default class Confetti extends React.Component {
 		this.lastFrame = performance.now();
 
 		requestAnimationFrame(this.onAnimationFrame.bind(this));
-		
-		this.burst();
 	}
 
 	render() {

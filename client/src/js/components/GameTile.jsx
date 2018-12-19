@@ -1,13 +1,5 @@
 import React from 'react';
 
-import Confetti from './Confetti';
-
-const ConditionalConfetti = props => {
-	if (props.show) {
-		return <Confetti { ...props }></Confetti>
-	} else return <React.Fragment></React.Fragment>
-}
-
 class GameTile extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,8 +7,8 @@ class GameTile extends React.Component {
 		this.tile = React.createRef();
 	}
 	
-	componentDidMount() {
-
+	getBounds() {
+		return this.tile.current.getBoundingClientRect();
 	}
 
 	render() {
@@ -36,8 +28,6 @@ class GameTile extends React.Component {
 						<span className="game__tile__vote__text">VOTES</span>
 					</div>
 				</div>
-
-				<ConditionalConfetti show={ choosen } padding={ 200 } elementRef={ this.tile } />
 			</React.Fragment>
 		);
 	}
