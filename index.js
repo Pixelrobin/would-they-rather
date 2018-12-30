@@ -9,4 +9,4 @@ console.log('');
 
 Server.listen(port, () => console.log(`RUNNING ON PORT ${ port }`));
 
-require('./test-utils/players');
+//require('./test-utils/players');

@@ -140,11 +140,11 @@ app.get('/end/:choice', (req, res) => {
 
 		tables.applyGameScores(newScores);
 
-		/*endTimeout = setTimeout(() => {
+		endTimeout = setTimeout(() => {
 			emitScoresState();
 			game.removeAllListeners();
 			game = null;
-		}, 5000);*/
+		}, 5000);
 
 		res.send('Game Ended');
 	} else res.send('Invalid choice');
