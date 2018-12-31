@@ -3,6 +3,8 @@ const express  = require('express');
 const socketio = require('socket.io');
 const twilio   = require('twilio');
 
+const throttle = require('lodash/throttle');
+
 const setup  = require('../setup.json');
 const Game   = require('./game');
 const tables = require('./tables');
@@ -119,9 +121,10 @@ app.get('/start/:questionID', (req, res) => {
 
 		game = new Game(questionID, numbers);
 		res.send(`New game: Would they rather ${ game.options[0] } or ${ game.options[1] }`);
+		console.log('new game');
 
 		game.on('tick', gameTickEvent);
-		game.on('update', gameUpdateEvent);
+		game.on('update', throttle(gameUpdateEvent, 500));
 
 		game.emitUpdate();
 
@@ -152,8 +155,8 @@ app.get('/end/:choice', (req, res) => {
 
 // -- Get round summary (for testing purposes)
 
-app.get('/summary', (req, res) => {
-	res.json(getServerState());
+app.get('/scores', (req, res) => {
+	res.json(tables.getState());
 });
 
 module.exports = server;

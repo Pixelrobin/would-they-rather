@@ -24437,7 +24437,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":"../../../node_modules/ms/index.js"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js":[function(require,module,exports) {
+},{"ms":"../../../node_modules/ms/index.js"}],"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -24811,7 +24811,7 @@ function localstorage() {
     return window.localStorage;
   } catch (e) {}
 }
-},{"./debug":"../../../node_modules/socket.io-client/node_modules/debug/src/debug.js","process":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js"}],"../../../node_modules/socket.io-client/lib/url.js":[function(require,module,exports) {
+},{"./debug":"../../../node_modules/socket.io-client/node_modules/debug/src/debug.js","process":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/process/browser.js"}],"../../../node_modules/socket.io-client/lib/url.js":[function(require,module,exports) {
 var global = arguments[3];
 
 /**
@@ -25280,7 +25280,7 @@ function localstorage() {
     return window.localStorage;
   } catch (e) {}
 }
-},{"./debug":"../../../node_modules/socket.io-parser/node_modules/debug/src/debug.js","process":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js"}],"../../../node_modules/component-emitter/index.js":[function(require,module,exports) {
+},{"./debug":"../../../node_modules/socket.io-parser/node_modules/debug/src/debug.js","process":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/process/browser.js"}],"../../../node_modules/component-emitter/index.js":[function(require,module,exports) {
 
 /**
  * Expose `Emitter`.
@@ -26129,7 +26129,7 @@ module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{}],"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -26282,7 +26282,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/ieee754/index.js":[function(require,module,exports) {
+},{}],"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/ieee754/index.js":[function(require,module,exports) {
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -26368,14 +26368,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/isarray/index.js":[function(require,module,exports) {
+},{}],"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/isarray/index.js":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/buffer/index.js":[function(require,module,exports) {
+},{}],"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/buffer/index.js":[function(require,module,exports) {
 
 var global = arguments[3];
 /*!
@@ -28168,7 +28168,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/base64-js/index.js","ieee754":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/ieee754/index.js","isarray":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/isarray/index.js","buffer":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/buffer/index.js"}],"../../../node_modules/has-binary2/index.js":[function(require,module,exports) {
+},{"base64-js":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/base64-js/index.js","ieee754":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/ieee754/index.js","isarray":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/isarray/index.js","buffer":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/buffer/index.js"}],"../../../node_modules/has-binary2/index.js":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 /* global Blob File */
 
@@ -28235,7 +28235,7 @@ function hasBinary (obj) {
   return false;
 }
 
-},{"isarray":"../../../node_modules/has-binary2/node_modules/isarray/index.js","buffer":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/buffer/index.js"}],"../../../node_modules/arraybuffer.slice/index.js":[function(require,module,exports) {
+},{"isarray":"../../../node_modules/has-binary2/node_modules/isarray/index.js","buffer":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/buffer/index.js"}],"../../../node_modules/arraybuffer.slice/index.js":[function(require,module,exports) {
 /**
  * An abstraction for slicing an arraybuffer even when
  * ArrayBuffer.prototype.slice is not supported
@@ -29959,7 +29959,7 @@ function localstorage() {
     return window.localStorage;
   } catch (e) {}
 }
-},{"./debug":"../../../node_modules/engine.io-client/node_modules/debug/src/debug.js","process":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js"}],"../../../node_modules/engine.io-client/lib/transports/polling.js":[function(require,module,exports) {
+},{"./debug":"../../../node_modules/engine.io-client/node_modules/debug/src/debug.js","process":"../../../../../../../usr/local/lib/node_modules/parcel/node_modules/process/browser.js"}],"../../../node_modules/engine.io-client/lib/transports/polling.js":[function(require,module,exports) {
 /**
  * Module dependencies.
  */
@@ -30855,7 +30855,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
   }
 };
 
-},{"./polling":"../../../node_modules/engine.io-client/lib/transports/polling.js","component-inherit":"../../../node_modules/component-inherit/index.js"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/_empty.js":[function(require,module,exports) {
+},{"./polling":"../../../node_modules/engine.io-client/lib/transports/polling.js","component-inherit":"../../../node_modules/component-inherit/index.js"}],"../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/_empty.js":[function(require,module,exports) {
 
 },{}],"../../../node_modules/engine.io-client/lib/transports/websocket.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -31146,7 +31146,7 @@ WS.prototype.check = function () {
   return !!WebSocket && !('__initialize' in WebSocket && this.name === WS.prototype.name);
 };
 
-},{"../transport":"../../../node_modules/engine.io-client/lib/transport.js","engine.io-parser":"../../../node_modules/engine.io-parser/lib/browser.js","parseqs":"../../../node_modules/parseqs/index.js","component-inherit":"../../../node_modules/component-inherit/index.js","yeast":"../../../node_modules/yeast/index.js","debug":"../../../node_modules/engine.io-client/node_modules/debug/src/browser.js","ws":"../../../../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/_empty.js"}],"../../../node_modules/engine.io-client/lib/transports/index.js":[function(require,module,exports) {
+},{"../transport":"../../../node_modules/engine.io-client/lib/transport.js","engine.io-parser":"../../../node_modules/engine.io-parser/lib/browser.js","parseqs":"../../../node_modules/parseqs/index.js","component-inherit":"../../../node_modules/component-inherit/index.js","yeast":"../../../node_modules/yeast/index.js","debug":"../../../node_modules/engine.io-client/node_modules/debug/src/browser.js","ws":"../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/_empty.js"}],"../../../node_modules/engine.io-client/lib/transports/index.js":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * Module dependencies
@@ -33826,7 +33826,7 @@ function (_React$Component) {
 var app = document.getElementById("app");
 
 _reactDom.default.render(_react.default.createElement(App, null), app);
-},{"react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","socket.io-client":"../../../node_modules/socket.io-client/lib/index.js","./components/Game":"../js/components/Game.jsx","./components/TableList":"../js/components/TableList.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","socket.io-client":"../../../node_modules/socket.io-client/lib/index.js","./components/Game":"../js/components/Game.jsx","./components/TableList":"../js/components/TableList.jsx"}],"../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33853,7 +33853,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53995" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49398" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -33995,5 +33995,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../../../../../AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js","../js/index.jsx"], null)
+},{}]},{},["../../../../../../../usr/local/lib/node_modules/parcel/src/builtins/hmr-runtime.js","../js/index.jsx"], null)
 //# sourceMappingURL=/js.dcea4e0e.map

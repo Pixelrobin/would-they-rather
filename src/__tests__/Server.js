@@ -96,40 +96,71 @@ describe('app', () => {
 		});
 	});
 
-	/*describe('full round', () => {
+	describe('full round', () => {
 		it('should complete a full round', async () => {
 			const submit = async (data, expected) => {
 				const res = await request(server).post('/submit').send(data);
 				expect(res.text).toBe(expected);
 			}
 
-			const players = [
-				{ number: '123', message: '1' },
-				{ number: '456', message: '2' },
-				{ number: '789', message: '3' },
-				{ number: '987', message: '3' }
-			];
+			const delay = async (ms) => {
+				return new Promise((resolve, reject) => {
+					setTimeout(resolve, ms);
+				});
+			}
 
-			// -- Register players
-			
-			players.forEach(data => {
-				submit(data, `You are now signed up for table ${ data.message }`);
-			});
+			const choice = 0;
+
+			// -- Register Players
+		
+			let number = 0;
+			let votes = {};
+			let expectedScores = [];
+
+			for (let table = 1; table < 4; table ++) {
+				let expectedScore = 0;
+				
+				for (let player = 0; player < 10; player ++) {
+					// RANDOM NUMBERS IN TESTS IS BAD
+					const randomChoice = Math.floor(Math.random() * 2);
+
+					if (randomChoice === choice) expectedScore ++;
+					votes[number] = randomChoice;
+
+					submit(
+						{ number: number.toString(), message: table.toString() },
+						`You are now signed up for table ${ table }`
+					);
+
+					number ++;
+				}
+
+				expectedScores.push(expectedScore);
+			}
+
+			await delay(1000);
 
 			// -- Start round
 			
-			await request(server).post('/start/1');
+			await request(server).get('/start/1');
 
-			request(server).post('/summary')
+			// -- Vote
+
+			await delay(1000);
+
+			const letters = ['A', 'B']
+
+			Object.keys(votes).forEach(number => {
+				const vote = votes[number];
+
+				submit({number, message: vote.toString()}, `Voted for ${ letters[vote] }!`);
+			});
+
+			/*request(server).get('/scores')
 				.then(res => {
-					expect(res.body).toEqual({
-
-					})
-				});
-
-			// -- Do some voting
-
-
+					console.log(res);
+				})
+				.catch(err => console.log(err));*/
 		});
-	});*/
+	});
 });

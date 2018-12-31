@@ -14,7 +14,7 @@ class Game extends EventEmitter {
 			this.options = options;
 		} else throw new Error(`Invalid question ID: ${questionID}`);
 
-		this.votes = [];
+		this.votes = {};
 		this.numbers = numbers;
 		this.time = roundLength;
 		this.finished = false;
@@ -31,7 +31,7 @@ class Game extends EventEmitter {
 			const voteIndex = ['a', 'b'].indexOf(vote);
 
 			if (voteIndex !== -1) {
-				this.votes[table] = voteIndex;
+				this.votes[number] = voteIndex;
 
 				this.emitUpdate();
 
@@ -57,9 +57,11 @@ class Game extends EventEmitter {
 	}
 
 	getState() {
-		const votes = this.votes
+		const votes = Object.keys(this.votes)
 			
-			.reduce((result, vote) => {
+			.reduce((result, number) => {
+				const vote = this.votes[number];
+
 				if (result[vote] !== undefined) {
 					result[vote] ++;
 				}
@@ -90,7 +92,18 @@ class Game extends EventEmitter {
 			this.choice = choice;
 			this.emitUpdate();
 
-			return this.votes.map(vote => vote === choice ? 1 : 0);
+			//return this.votes.map(vote => vote === choice ? 1 : 0);
+			return Object.keys(this.votes).reduce((scores, number) => {
+				const vote = this.votes[number];
+				const table = this.numbers[number];
+
+				if (vote === choice) {
+					if (scores[table] === undefined) scores[table] = 0;
+					scores[table] ++;
+				}
+
+				return scores;
+			}, []);
 		}
 	}
 }
