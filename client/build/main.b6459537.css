@@ -148,7 +148,8 @@ select, button {
   .admin h1 {
     margin-bottom: 3rem; }
   .admin .options {
-    margin-top: 5rem; }
+    margin-top: 5rem;
+    margin-bottom: 5rem; }
     .admin .options button {
       display: inline-block;
       margin-right: 1rem;

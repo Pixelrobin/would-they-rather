@@ -161,6 +161,15 @@ app.get('/questions', (req, res) => {
 	res.json(questions);
 });
 
+// -- Clear scores
+
+app.get('/clearscores', (req, res) => {
+	tables.clearScores();
+	updateClients();
+
+	res.send('scores cleared');
+});
+
 // -- Get round summary (for testing purposes)
 
 app.get('/scores', (req, res) => {

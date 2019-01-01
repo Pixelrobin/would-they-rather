@@ -24061,6 +24061,7 @@ function (_React$Component) {
     _this.start = _react.default.createRef();
     _this.buttonA = _react.default.createRef();
     _this.buttonB = _react.default.createRef();
+    _this.clear = _react.default.createRef();
     return _this;
   }
 
@@ -24106,6 +24107,14 @@ function (_React$Component) {
 
       this.buttonA.current.addEventListener('click', endRound(0));
       this.buttonB.current.addEventListener('click', endRound(1));
+      this.clear.current.addEventListener('click', function (e) {
+        e.preventDefault();
+        fetch("/clearscores").then(function (res) {
+          return res.text();
+        }).then(function (res) {
+          return console.log(res);
+        });
+      });
     }
   }, {
     key: "render",
@@ -24131,7 +24140,9 @@ function (_React$Component) {
         ref: this.buttonA
       }, options[0] ? options[0] : '...'), _react.default.createElement("button", {
         ref: this.buttonB
-      }, options[1] ? options[1] : '...')));
+      }, options[1] ? options[1] : '...')), _react.default.createElement("button", {
+        ref: this.clear
+      }, "Clear Scores"));
     }
   }]);
 

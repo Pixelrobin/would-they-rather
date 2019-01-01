@@ -17,6 +17,12 @@ function get() {
 	return scores;
 }
 
+function clearScores() {
+	Object.keys(scores).map(key => {
+		scores[key] = 0;
+	});
+}
+
 function getState() {
 	let tables = Object.keys(scores).map(table => {
 		const tableNum = parseInt(table);
@@ -56,4 +62,4 @@ function applyGameScores(newScores) {
 	});
 }
 
-module.exports = { registerTable, get, getState, applyGameScores }
+module.exports = { registerTable, get, getState, applyGameScores, clearScores }

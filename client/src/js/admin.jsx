@@ -14,6 +14,8 @@ class App extends React.Component {
 		this.start = React.createRef();
 		this.buttonA = React.createRef();
 		this.buttonB = React.createRef();
+
+		this.clear = React.createRef();
 	}
 
 	componentDidMount() {
@@ -44,6 +46,14 @@ class App extends React.Component {
 
 		this.buttonA.current.addEventListener('click', endRound(0));
 		this.buttonB.current.addEventListener('click', endRound(1));
+
+		this.clear.current.addEventListener('click', e => {
+			e.preventDefault();
+
+			fetch(`/clearscores`)
+				.then(res => res.text())
+				.then(res => console.log(res));
+		})
 	}
 
 	render() {
@@ -64,6 +74,8 @@ class App extends React.Component {
 					<button ref={this.buttonA}>{ options[0] ? options[0] : '...' }</button>
 					<button ref={this.buttonB}>{ options[1] ? options[1] : '...' }</button>
 				</div>
+
+				<button ref={ this.clear }>Clear Scores</button>
 			</div>
 		)
 	}
