@@ -2,6 +2,8 @@ const http     = require('http');
 const express  = require('express');
 const socketio = require('socket.io');
 const twilio   = require('twilio');
+const jsonfile = require('jsonfile');
+const path     = require('path');
 
 const throttle = require('lodash/throttle');
 
@@ -31,6 +33,16 @@ let numbers = {};
 let game;
 let endTimeout = -1;
 
+jsonfile.readFile(path.resolve(__dirname, '../numbers-backup.json'), (err, obj) => {
+	if (!err) {
+		numbers = obj;
+	}
+});
+
+setInterval(() => {
+	console.log('numbers backup');
+	jsonfile.writeFile(path.resolve(__dirname, '../numbers-backup.json'), numbers);
+}, 1000 * 30);
 
 /* --- socket.io --- */
 
