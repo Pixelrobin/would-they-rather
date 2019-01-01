@@ -9,6 +9,8 @@ const setup  = require('../setup.json');
 const Game   = require('./game');
 const tables = require('./tables');
 
+const questions = require('../data/questions');
+
 
 /* --- App Setup --- */
 
@@ -120,8 +122,8 @@ app.get('/start/:questionID', (req, res) => {
 		clearInterval(endTimeout);
 
 		game = new Game(questionID, numbers);
-		res.send(`New game: Would they rather ${ game.options[0] } or ${ game.options[1] }`);
-		console.log('new game');
+		//res.send(`New game: Would they rather ${ game.options[0] } or ${ game.options[1] }`);
+		res.json(game.options);
 
 		game.on('tick', gameTickEvent);
 		game.on('update', throttle(gameUpdateEvent, 500));
@@ -151,6 +153,12 @@ app.get('/end/:choice', (req, res) => {
 
 		res.send('Game Ended');
 	} else res.send('Invalid choice');
+});
+
+// -- Get a list of questions (for admin)
+
+app.get('/questions', (req, res) => {
+	res.json(questions);
 });
 
 // -- Get round summary (for testing purposes)

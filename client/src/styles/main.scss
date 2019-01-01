@@ -212,3 +212,27 @@ body {
 	left: 0;
 	top: 0;
 }
+
+select, button {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.admin {
+	padding: 2rem;
+	font-family: sans-serif;
+
+	h1 {
+		margin-bottom: 3rem;
+	}
+
+	.options {
+		margin-top: 5rem;
+		button {
+			display: inline-block;
+			margin-right: 1rem;
+			width: 300px;
+			height: 200px;
+		}
+	}
+}

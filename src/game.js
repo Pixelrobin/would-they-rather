@@ -25,18 +25,20 @@ class Game extends EventEmitter {
 
 	submit(number, message) {
 		if (number in this.numbers) {
-			const vote = message.toLowerCase().replace(/([^a-z])/g, '');
-			const table = this.numbers[number].toString();
+			if (this.finished === false) {
+				const vote = message.toLowerCase().replace(/([^a-z])/g, '');
+				const table = this.numbers[number].toString();
 
-			const voteIndex = ['a', 'b'].indexOf(vote);
+				const voteIndex = ['a', 'b'].indexOf(vote);
 
-			if (voteIndex !== -1) {
-				this.votes[number] = voteIndex;
+				if (voteIndex !== -1) {
+					this.votes[number] = voteIndex;
 
-				this.emitUpdate();
+					this.emitUpdate();
 
-				return `Voted for ${ vote.toUpperCase() }!`;
-			} else return 'Please vote with "A" or "B"';
+					return `Voted for ${ vote.toUpperCase() }!`;
+				} else return 'Please vote with "A" or "B"';
+			} else return 'Time is up!';
 		} else return 'Your number is not signed up for a table';
 	}
 
