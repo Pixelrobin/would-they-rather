@@ -11,7 +11,7 @@ A game I made meant to be played with a large group of people for a church youth
 * Socket.io for realtime data
 * React for running the front end
 * Parcel for bundling and building the frontend
-* Twilio SMS for handling the voting process itself
+* Twilio SMS for handling the voting process itself (just using a webhook callback)
 
 ## How the game works
 
@@ -23,7 +23,7 @@ A game I made meant to be played with a large group of people for a church youth
 
 ## Setup
 
-I wrote this so long ago that I don't remeber all the steps required exactly. I also didn't use the best practices out there haha.
+I wrote this so long ago that I don't remember all the steps required exactly. I also didn't use the best code practices at the time.
 But if you at least want to get this running locally on a test mode:
 
 1. `nvm use` for Node 12 and `npm install`
