@@ -10,14 +10,14 @@ async function delay(ms) {
 }
 
 async function test() {
-    utils.get('/start/0');
+    utils.get('/start/1');
 
     await delay(500);
 
     let number = 0;
 
     const submitVote = async (number, message) => {
-        await delay(Math.random() * 3000);
+        await delay(Math.random() * 9000);
 
         utils.submit({ number, message })
     }
@@ -35,7 +35,7 @@ async function test() {
         }
     }
 
-    await delay(5000);
+    await delay(10000);
 
     utils.get('/end/0');
 }

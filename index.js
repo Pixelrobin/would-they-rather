@@ -1,5 +1,5 @@
 const Server = require('./src/Server');
-const port = 80;
+const port = 8080;
 
 console.log('');
 console.log('+----------------------------------+');
@@ -9,4 +9,4 @@ console.log('');
 
 Server.listen(port, () => console.log(`RUNNING ON PORT ${ port }`));
 
-//require('./test-utils/players2');
+require('./test-utils/players2');
